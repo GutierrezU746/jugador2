@@ -21,6 +21,7 @@ namespace jugador2
                 Personaje.Fuerza = int.Parse(Console.ReadLine());
                 Console.WriteLine("Ingrese el Mana del personaje");
                 Personaje.Mana = int.Parse(Console.ReadLine()); Personaje.ManaInicial = Personaje.Mana;
+                
         }
         public static void MostrarDatos(Personaje Personaje)
         {
@@ -51,15 +52,15 @@ namespace jugador2
                 switch (Seleccion)
                 {
                     case 1:
-                        Console.WriteLine("A que color desea cambiar?");
+                        Console.WriteLine("¿A que color desea cambiar?");
                         Personaje1.CambiarColor(Console.ReadLine());
                         break;
                     case 2:
-                        Console.WriteLine("Cuanto daño recibe?");
+                        Console.WriteLine("¿Cuanto daño recibe?");
                         Console.WriteLine(Personaje1.RecibirDaño(int.Parse(Console.ReadLine())));
                         if (Personaje1.Vida <= 0)
                         {
-                            Console.WriteLine("✝Te fuiste al cielo✝");
+                            Console.WriteLine("Moriste");
                         }
                         Console.ReadKey();
                         break;
@@ -73,10 +74,10 @@ namespace jugador2
                         break;
                     case 4:
                         PocionVida PocionVida = new PocionVida(); PocionMana PocionMana = new PocionMana();
-                        Console.WriteLine("Que pocion quiere usar");
+                        Console.WriteLine("¿Que pocion quiere usar?");
                         Console.WriteLine("1- Vida  2- Mana");
                         int Pocion = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Sobre quien quiere usar la pocion?");
+                        Console.WriteLine("¿Sobre quien quiere usar la pocion?");
                         Console.WriteLine("1- Jugador  2- Enemigo");
                         int Receptor = int.Parse(Console.ReadLine());
                         Console.WriteLine("Ingrese un Minimo");
@@ -108,10 +109,13 @@ namespace jugador2
                                 }
                                 break;
                             default:
-                                Console.WriteLine("Elija una de las pociones manito");
+                                Console.WriteLine("Elija una de las opciones anteriores");
                                 break;
                         }
                         break;
+                    case 5:
+
+                        break;                    
                     default:
                         Console.WriteLine("Elija una de las opciones");
                         break;

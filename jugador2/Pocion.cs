@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace jugador2
 {
-    internal abstract class Pocion
+    internal abstract class Pocion:Item
     {
         public int Minimo;
         public int Maximo;
-
-        public abstract int Usar(Personaje Personaje);
     }
 }

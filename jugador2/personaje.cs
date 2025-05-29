@@ -1,4 +1,5 @@
-﻿using System;
+﻿using jugador2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,11 @@ namespace Jugador2
 {
     public class Personaje
     {
+        public Inventario Inventario { get; set; } = new Inventario();
         public string Color;
         public int Vida,VidaInicial, Defensa, Fuerza, Mana, ManaInicial;
 
+       
         public void CambiarColor(string NuevoColor)
         {
             Color = NuevoColor;
