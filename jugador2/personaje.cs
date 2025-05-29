@@ -13,7 +13,7 @@ namespace Jugador2
         public string Color;
         public int Vida,VidaInicial, Defensa, Fuerza, Mana, ManaInicial;
 
-       
+         
         public void CambiarColor(string NuevoColor)
         {
             Color = NuevoColor;
