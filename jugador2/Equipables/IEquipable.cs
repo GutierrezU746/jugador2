@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace jugador2
+namespace jugador2.Equipables
 {
-    internal abstract class Pocion:Item
+    public interface IEquipable
     {
-        public int Minimo;
-        public int Maximo;
+        void Equipar(Personaje personaje);
+        void Desequipar(Personaje personaje);
     }
 }

@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace jugador2
 {
-    public abstract class Item 
+    public abstract class Pocion:Item,IUsable
     {
-        public Inventario inventario;
+        public int Minimo;
+        public int Maximo;
+        public abstract int Usar(Personaje personaje);
     }
 }

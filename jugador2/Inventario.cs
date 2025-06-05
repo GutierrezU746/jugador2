@@ -9,18 +9,18 @@ namespace jugador2
 {
     public class Inventario
     {
-        public Personaje personaje { get; set; }
-        List<Item> items = new List<Item>();
+        public Personaje personaje;
+        public List<Item> Items = new List<Item>();
+
         public void agregarItem(Item item)
         {
-            items.Add(item);
+            Items.Add(item);
             item.inventario = this;
         }
         public void removerItem(Item item)
         {
-            items.Remove(item);
+            Items.Remove(item);
             item.inventario = null;
         }
-
     }
 }

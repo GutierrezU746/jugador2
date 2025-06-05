@@ -7,33 +7,36 @@ using System.Threading.Tasks;
 
 namespace jugador2
 {
-    internal class Program
+    public class Program
     {
-        public static PocionVida=new PocionVida(); 
-        public static PocionMana=new PocionMana();
+        public static PocionVida PocionVida = new PocionVida(); public static PocionMana PocionMana = new PocionMana();
         public static void Carga(Personaje Personaje)
         {
-                Console.WriteLine("Ingrese el Color del personaje");
-                Personaje.CambiarColor(Console.ReadLine());
-                Console.WriteLine("Ingrese la Vida del personaje");
-                Personaje.Vida = int.Parse(Console.ReadLine()); Personaje.VidaInicial = Personaje.Vida;
-                Console.WriteLine("Ingrese la Defensa del personaje");
-                Personaje.Defensa = int.Parse(Console.ReadLine());
-                Console.WriteLine("Ingrese la Fuerza del personaje");
-                Personaje.Fuerza = int.Parse(Console.ReadLine());
-                Console.WriteLine("Ingrese el Mana del personaje");
-                Personaje.Mana = int.Parse(Console.ReadLine()); Personaje.ManaInicial = Personaje.Mana;
-                
+            Inventario Inventario = new Inventario();
+            Console.WriteLine("Ingrese el Color del personaje");
+            Personaje.CambiarColor(Console.ReadLine());
+            Console.WriteLine("Ingrese la Vida del personaje");
+            Personaje.Vida = int.Parse(Console.ReadLine()); Personaje.VidaInicial = Personaje.Vida;
+            Console.WriteLine("Ingrese la Defensa del personaje");
+            Personaje.Defensa = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese la Fuerza del personaje");
+            Personaje.Fuerza = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese el Mana del personaje");
+            Personaje.Mana = int.Parse(Console.ReadLine()); Personaje.ManaInicial = Personaje.Mana;
+            Personaje.Inventario = Inventario; Inventario.personaje = Personaje;
+            Personaje.Inventario.agregarItem(PocionVida);
+            Personaje.Inventario.agregarItem(PocionMana);
         }
         public static void MostrarDatos(Personaje Personaje)
         {
-            Console.WriteLine("Color: " + Personaje.Color);
-            Console.WriteLine("Vida: " + Personaje.Vida);
-            Console.WriteLine("Defensa: " + Personaje.Defensa);
-            Console.WriteLine("Fuerza: " + Personaje.Fuerza);
-            Console.WriteLine("Mana: " + Personaje.Mana);
-            Console.WriteLine("-------Inventario-------");
-            foreach (var item in Personaje.Inventario.Item)
+            Console.WriteLine("---Personaje---");
+            Console.WriteLine($"Color: {Personaje.Color}");
+            Console.WriteLine($"Vida: {Personaje.Vida}");
+            Console.WriteLine($"Defensa: {Personaje.Defensa}");
+            Console.WriteLine($"Fuerza: {Personaje.Fuerza}");
+            Console.WriteLine($"Mana: {Personaje.Mana}");
+            Console.WriteLine("---Inventario---");
+            foreach (Item item in Personaje.Inventario.Items)
             {
                 Console.WriteLine($"- {item}");
             }
@@ -59,11 +62,11 @@ namespace jugador2
                 switch (Seleccion)
                 {
                     case 1:
-                        Console.WriteLine("¿A que color desea cambiar?");
+                        Console.WriteLine("A que color desea cambiar?");
                         Personaje1.CambiarColor(Console.ReadLine());
                         break;
                     case 2:
-                        Console.WriteLine("¿Cuanto daño recibe?");
+                        Console.WriteLine("Cuanto daño recibe?");
                         Console.WriteLine(Personaje1.RecibirDaño(int.Parse(Console.ReadLine())));
                         if (Personaje1.Vida <= 0)
                         {
@@ -80,77 +83,65 @@ namespace jugador2
                         Console.ReadKey();
                         break;
                     case 4:
-                        PocionVida PocionVida = new PocionVida(); PocionMana PocionMana = new PocionMana();
-                        Console.WriteLine("¿Que pocion quiere usar?");
-                        Console.WriteLine("1- Vida  2- Mana");
+                        Console.WriteLine("Que Item quiere usar");
+                        Console.WriteLine("1- Pocion de Vida  2- Pocion de Mana");
                         int Pocion = int.Parse(Console.ReadLine());
-                        Console.WriteLine("¿Sobre quien quiere usar la pocion?");
+                        Console.WriteLine("Sobre quien quiere usar el item");
                         Console.WriteLine("1- Jugador  2- Enemigo");
                         int Receptor = int.Parse(Console.ReadLine());
                         Console.WriteLine("Ingrese un Minimo");
-                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = int.Parse(Console.ReadLine());
+                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = PocionMana.Minimo;
                         Console.WriteLine("Ingrese un Maximo");
-                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = int.Parse(Console.ReadLine());
+                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = PocionMana.Minimo;
                         switch (Pocion)
                         {
                             case 1:
                                 switch (Receptor)
                                 {
                                     case 1:
-                                        if(Personaje1.Inventario.Item.container(PocionVida)==true)
+                                        if (Personaje1.Inventario.Items.Contains(PocionVida) == true)
                                         {
                                             PocionVida.Usar(Personaje1);
-                                            PocionVida.inventario.removerItem(PocionVida);
+                                            Personaje1.Inventario.removerItem(PocionVida);
                                         }
-                                        else
-                                        {
-                                            Console.WriteLine($"El Personaje {Personaje1.Color} No tiene pocion de vida");
-                                        }
+                                        else { Console.WriteLine($"El Personaje {Personaje1.Color} no tiene una Pocion de Vida"); Console.ReadKey(); }
+                                        break;
                                     case 2:
-                                        if (Personaje2.Inventario.Item.container(PocionVida) == true)
+                                        if (Personaje2.Inventario.Items.Contains(PocionVida) == true)
                                         {
                                             PocionVida.Usar(Personaje2);
-                                            PocionVida.inventario.removerItem(PocionVida);
+                                            Personaje2.Inventario.removerItem(PocionVida);
                                         }
-                                        else
-                                        {
-                                            Console.WriteLine($"El Personaje {Personaje2.Color} No tiene pocion de vida");
-                                        }
+                                        else { Console.WriteLine($"El Personaje {Personaje2.Color} no tiene una Pocion de Vida"); Console.ReadKey(); }
                                         break;
                                 }
                                 break;
                             case 2:
                                 switch (Receptor)
                                 {
-                                    if (Personaje1.Inventario.Item.container(PocionMana) == true)
-                                {
-                                    PocionMana.Usar(Personaje1);
-                                    PocionMana.inventario.removerItem(PocionMana);
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"El Personaje {Personaje1.Color} No tiene pocion de maná");
-                                }
-                            case 2:
-                                if (Personaje2.Inventario.Item.container(PocionMana) == true)
-                                {
-                                    PocionMana.Usar(Personaje2);
-                                    PocionMana.inventario.removerItem(PocionMana);
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"El Personaje {Personaje2.Color} No tiene pocion de maná");
+                                    case 1:
+                                        if (Personaje1.Inventario.Items.Contains(PocionMana) == true)
+                                        {
+                                            PocionMana.Usar(Personaje1);
+                                            Personaje1.Inventario.removerItem(PocionMana);
+                                        }
+                                        else { Console.WriteLine($"El Personaje {Personaje1.Color} no tiene una Pocion de Mana"); Console.ReadKey(); }
+                                        break;
+                                    case 2:
+                                        if (Personaje2.Inventario.Items.Contains(PocionMana) == true)
+                                        {
+                                            PocionMana.Usar(Personaje2);
+                                            Personaje2.Inventario.removerItem(PocionMana);
+                                        }
+                                        else { Console.WriteLine($"El Personaje {Personaje2.Color} no tiene una Pocion de Mana"); Console.ReadKey(); }
+                                        break;
                                 }
                                 break;
-                        }
                             default:
-                                Console.WriteLine("Elija una de las opciones anteriores");
+                                Console.WriteLine("Elija una de las pociones manito");
                                 break;
                         }
                         break;
-                    case 5:
-
-                        break;                    
                     default:
                         Console.WriteLine("Elija una de las opciones");
                         break;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace jugador2
 {
-    internal class PocionMana : Pocion
+    public class PocionMana : Pocion
     {
         Random Random = new Random();
         public override int Usar(Personaje Personaje)
@@ -26,6 +26,10 @@ namespace jugador2
                 Personaje.Mana = Personaje.ManaInicial;
             }
             return Personaje.Mana;
+        }
+        public override string ToString()
+        {
+            return "Pocion de Mana";
         }
     }
 }

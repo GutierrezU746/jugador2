@@ -43,12 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Equipables\Casco.cs" />
+    <Compile Include="Equipables\Chaleco.cs" />
+    <Compile Include="Equipables\Equipo.cs" />
+    <Compile Include="Equipables\Espada.cs" />
+    <Compile Include="Equipables\IEquipable.cs" />
     <Compile Include="Inventario.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Usables\IUsable.cs" />
     <Compile Include="personaje.cs" />
-    <Compile Include="Pocion.cs" />
-    <Compile Include="PocionManá.cs" />
-    <Compile Include="PocionVida.cs" />
+    <Compile Include="Usables\Pocion.cs" />
+    <Compile Include="Usables\PocionManá.cs" />
+    <Compile Include="Usables\PocionVida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

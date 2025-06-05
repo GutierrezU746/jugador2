@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace jugador2
 {
-    public abstract class Item 
+    public interface IUsable
     {
-        public Inventario inventario;
+        int Usar(Personaje personaje);
     }
 }
