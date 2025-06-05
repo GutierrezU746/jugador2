@@ -1,4 +1,5 @@
-﻿using Jugador2;
+﻿using jugador2.Equipables;
+using Jugador2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,16 +84,40 @@ namespace jugador2
                         Console.ReadKey();
                         break;
                     case 4:
-                        Console.WriteLine("Que Item quiere usar");
-                        Console.WriteLine("1- Pocion de Vida  2- Pocion de Mana");
-                        int Pocion = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Sobre quien quiere usar el item");
-                        Console.WriteLine("1- Jugador  2- Enemigo");
+                        int n = 0;
+                        foreach (Item item in Personaje1.Inventario.Items)
+                        {
+                            Console.WriteLine($"{n}- {item}.");
+                            n++;
+                        }
+                        Console.WriteLine("Que item quiere usar");
+                        int itemSelect =int.Parse( Console.ReadLine());
+                        switch (itemSelect)
+                        {
+                            case 1:
+                                if (Personaje1.Inventario.Items[itemSelect] is IUsable usable)
+                                {
+                                    usable.Usar(Personaje1);
+                                }
+                                break;
+                            case 2:
+                                if (Personaje1.Inventario.Items[itemSelect] is IEquipable equipable)
+                                {
+                                    equipable.Equipar(Personaje1);
+                                }
+                                break;
+                            case 3:
+                                break;
+                        }
+                        
+
                         int Receptor = int.Parse(Console.ReadLine());
                         Console.WriteLine("Ingrese un Minimo");
-                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = PocionMana.Minimo;
+                        PocionMana.Minimo = int.Parse(Console.ReadLine());
+                        PocionVida.Minimo = PocionMana.Minimo;
                         Console.WriteLine("Ingrese un Maximo");
-                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = PocionMana.Minimo;
+                        PocionMana.Maximo = int.Parse(Console.ReadLine());
+                        PocionVida.Maximo = PocionMana.Minimo;
                         switch (Pocion)
                         {
                             case 1:
